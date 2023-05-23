@@ -1,0 +1,28 @@
+body{
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+}
+div {
+    font-weight: 200;
+    font-style: normal;
+    text-align: center;
+    padding: 0% 5%;
+}
+h2,h3 {
+    text-align: center;
+}
+p {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    border: 3px;
+}
+img{
+    width: 50%;
+    height: 50%;
+}
+
+.error {
+    border: 2px solid red;
+}
