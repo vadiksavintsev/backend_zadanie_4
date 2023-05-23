@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Получение данных из формы
     $name = $_POST["name"];
     $email = $_POST["email"];
-    $birth_year = $_POST["birth_year"];
+    $year = $_POST["year"];
     $gender = $_POST["gender"];
     $limbs = $_POST["limbs"];
     $powers = $_POST["powers"];
@@ -101,25 +101,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 if (empty($email)) {
     $errors[] = "Поле E-mail не должно быть пустым.";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 
 if (empty($year)) {
     $errors[] = "Поле Год рождения не должно быть пустым.";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 
 if (empty($gender)) {
     $errors[] = "Поле Пол не должно быть пустым.";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 
 if (empty($limbs)) {
     $errors[] = "Поле Количество конечностей не должно быть пустым.";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 if (!empty($name) && !preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
     $errors[] = "Имя содержит недопустимые символы. Допустимо использовать буквы русского и английского алфавитов";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
  
 if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/.*@.*\.ru$/", $email))) {
     $errors[] = "Неверный формат e-mail.";
+    $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 
 
@@ -127,6 +145,9 @@ if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match
 
 if(!$check_kontrol){
   $errors[] = "Пожалуйста ознакомьтесь с правилами.";
+  $nameClass = "error"; // добавляем класс error, если есть ошибка
+} else {
+  $nameClass = ""; // очищаем класс, если ошибки нет
 }
 
 $_SESSION['data'] = [
@@ -168,7 +189,7 @@ $_SESSION['data'] = [
             setcookie('check_kontrol', $check_kontrol, $cookie_expires);
             unset($_SESSION['data']);
 
-            header("Location: index.php");
+            header("Location: form.php");
             exit();
         } catch (PDOException $e) {
             print('Error : ' . $e->getMessage());
@@ -178,7 +199,7 @@ $_SESSION['data'] = [
         foreach ($errors as $field => $error) {
             $_SESSION['errors'][$field] = $error;
         }
-        header("Location: index.php");
+        header("Location: form.php");
         exit();
     }
 }
