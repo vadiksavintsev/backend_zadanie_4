@@ -23,6 +23,7 @@ img{
     height: 50%;
 }
 
-.error {
-    border: 5px solid red;
-}
+input[type="text"]:invalid{border:2px solid red}
+input[type="email"]:invalid{border:2px solid red}
+input[type="radio"]:invalid{border:2px solid red}
+input[type="checkbox"]:invalid{border:2px solid red}
