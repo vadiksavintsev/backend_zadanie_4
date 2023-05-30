@@ -91,63 +91,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Валидация полей (проверка на пустоту и корректность)
     if (empty($name)) 
     {
-    $errors[] = "Поле Имя не должно быть пустым.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['name'] = "Поле Имя не должно быть пустым.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $name=test_input($_POST["name"]);
 }
 
     
 
 if (empty($email)) {
-    $errors[] = "Поле E-mail не должно быть пустым.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['email'] = "Поле E-mail не должно быть пустым.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $email=test_input($_POST["email"]);
 }
 
-if (empty($year)) {
-    $errors[] = "Поле Год рождения не должно быть пустым.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
-} else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
-}
 
 if (empty($gender)) {
-    $errors[] = "Поле Пол не должно быть пустым.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['gender'] = "Поле Пол не должно быть пустым.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $gender=test_input($_POST["gender"]);
 }
 
 if (empty($limbs)) {
-    $errors[] = "Поле Количество конечностей не должно быть пустым.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['limbs'] = "Поле Количество конечностей не должно быть пустым.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $limbs=test_input($_POST["limbs"]);
 }
 if (!empty($name) && !preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
-    $errors[] = "Имя содержит недопустимые символы. Допустимо использовать буквы русского и английского алфавитов";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['name'] = "Имя содержит недопустимые символы. Допустимо использовать буквы русского и английского алфавитов";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $name=test_input($_POST["name"]);
 }
  
 if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/.*@.*\.ru$/", $email))) {
-    $errors[] = "Неверный формат e-mail.";
-    $nameClass = "error"; // добавляем класс error, если есть ошибка
+    $errors['email'] = "Неверный формат e-mail.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $email=test_input($_POST["email"]);
+}
+
+if(empty($powers)){
+  $errors['powers']= "Выберите способность.";
+} else{
+  $powers=test_input($_POST["powers"]);
+}
+
+if(empty($biography)){
+  $errors['biography']= "Напишите о себе.";
+} else {
+  $biography=test_input($_POST["biography"]);
 }
 
 
-
-
 if(!$check_kontrol){
-  $errors[] = "Пожалуйста ознакомьтесь с правилами.";
-  $nameClass = "error"; // добавляем класс error, если есть ошибка
+  $errors['check_kontrol'] = "Пожалуйста ознакомьтесь с правилами.";
 } else {
-  $nameClass = ""; // очищаем класс, если ошибки нет
+  $check_kontrol=test_input($_POST["check_kontrol"]);
 }
 
 $_SESSION['data'] = [
