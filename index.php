@@ -128,12 +128,6 @@ if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match
   $email=test_input($_POST["email"]);
 }
 
-if(empty($powers)){
-  $errors['powers']= "Выберите способность.";
-} else{
-  $powers=test_input($_POST["powers"]);
-}
-
 if(empty($biography)){
   $errors['biography']= "Напишите о себе.";
 } else {
