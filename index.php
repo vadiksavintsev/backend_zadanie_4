@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+function showError($field)
+{
+    if (isset($_SESSION['errors'][$field])) {
+        return '<span class="error">' . $_SESSION['errors'][$field] . '</span>';
+    }
+    return '';
+}
+
 function getSelected($fieldName, $value)
 {
     if (isset($_COOKIE[$fieldName]) && in_array($value, explode(',', $_COOKIE[$fieldName]))) {
