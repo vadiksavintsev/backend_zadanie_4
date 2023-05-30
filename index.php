@@ -92,54 +92,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($name)) 
     {
     $errors['name'] = "Поле Имя не должно быть пустым.";
-} else {
-  $name=test_input($_POST["name"]);
-}
+} 
 
     
 
 if (empty($email)) {
     $errors['email'] = "Поле E-mail не должно быть пустым.";
-} else {
-  $email=test_input($_POST["email"]);
-}
+} 
 
 
 if (empty($gender)) {
     $errors['gender'] = "Поле Пол не должно быть пустым.";
-} else {
-  $gender=test_input($_POST["gender"]);
-}
+} 
 
 if (empty($limbs)) {
     $errors['limbs'] = "Поле Количество конечностей не должно быть пустым.";
-} else {
-  $limbs=test_input($_POST["limbs"]);
-}
+} 
 if (!empty($name) && !preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
     $errors['name'] = "Имя содержит недопустимые символы. Допустимо использовать буквы русского и английского алфавитов";
-} else {
-  $name=test_input($_POST["name"]);
-}
+} 
  
 if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/.*@.*\.ru$/", $email))) {
     $errors['email'] = "Неверный формат e-mail.";
-} else {
-  $email=test_input($_POST["email"]);
-}
+} 
 
 if(empty($biography)){
   $errors['biography']= "Напишите о себе.";
-} else {
-  $biography=test_input($_POST["biography"]);
 }
 
 
 if(!$check_kontrol){
   $errors['check_kontrol'] = "Пожалуйста ознакомьтесь с правилами.";
-} else {
-  $check_kontrol=test_input($_POST["check_kontrol"]);
-}
+} 
 
 $_SESSION['data'] = [
     'name' => $name,
