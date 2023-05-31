@@ -92,21 +92,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($name)) 
     {
     $errors[] = "Поле Имя не должно быть пустым.";
+    setcookie('name','', 10000);
 } 
 
     
 
 if (empty($email)) {
     $errors[] = "Поле E-mail не должно быть пустым.";
+    setcookie('email','',time()+60*60*24);
 } 
 
 
 if (empty($gender)) {
     $errors[] = "Поле Пол не должно быть пустым.";
+    setcookie('gender','',time()+60*60*24);
 } 
 
 if (empty($limbs)) {
     $errors[] = "Поле Количество конечностей не должно быть пустым.";
+    setcookie('limbs','',time()+60*60*24);
 } 
 if (!empty($name) && !preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
     $errors[] = "Имя содержит недопустимые символы. Допустимо использовать буквы русского и английского алфавитов";
@@ -114,15 +118,18 @@ if (!empty($name) && !preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]+$/u", $name)) {
  
 if (!empty($email) && (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/.*@.*\.ru$/", $email))) {
     $errors[] = "Неверный формат e-mail.";
+    setcookie('email','$email',time()+60*60*24);
 } 
 
 if(empty($biography)){
   $errors[]= "Напишите о себе.";
+  setcookie('biography','',time()+60*60*24);
 }
 
 
 if(!$check_kontrol){
   $errors[] = "Пожалуйста ознакомьтесь с правилами.";
+  setcookie('check_kontrol','',time()+60*60*24);
 } 
 
 $_SESSION['data'] = [
